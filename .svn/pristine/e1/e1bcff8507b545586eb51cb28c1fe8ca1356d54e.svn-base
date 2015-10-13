@@ -1,5 +1,0 @@
-package script.contactlab.com;
-
-public enum StatementType {
-	CONTINUE, INIT;
-}
