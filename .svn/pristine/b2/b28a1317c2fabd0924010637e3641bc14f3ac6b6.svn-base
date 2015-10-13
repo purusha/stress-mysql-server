@@ -1,0 +1,30 @@
+package runner.contactlab.com;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.LineNumberReader;
+
+public class FileTest {
+	public static void main(String[] args) throws IOException {		
+		
+//		final String generalLogQueryFile = "/home/alan/Desktop/db1m-staging.log";
+//		
+//		File f = new File(generalLogQueryFile);
+//		
+//		System.err.println(f.getAbsolutePath());
+//		System.err.println(f.getCanonicalPath());
+//		System.err.println(f.getParent());
+
+		final FileInputStream fstream = new FileInputStream("/home/alan/Desktop/files/48");			
+		final BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+		final LineNumberReader lnr = new LineNumberReader(br);
+		
+		lnr.skip(Long.MAX_VALUE);
+		System.err.println(lnr.getLineNumber());
+		
+		br.close();
+		lnr.close();		
+	}
+}

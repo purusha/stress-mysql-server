@@ -1,0 +1,139 @@
+package runner.contactlab.com;
+
+import java.beans.PropertyVetoException;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
+
+import javax.sql.DataSource;
+
+import script.contactlab.com.ApplicationParameter;
+import script.contactlab.com.LoadDataFileNameRepository;
+import script.contactlab.com.SearchLoadDataStatement;
+import script.contactlab.com.SplitGeneralQueryLogFile;
+import script.contactlab.com.TimerConnectionAggregator;
+
+import com.google.inject.Inject;
+
+public class DelayedApplicationRunner extends ApplicationRunner {
+	
+	private LoadDataFileNameRepository repository;
+
+	@Inject
+	public DelayedApplicationRunner(final LoadDataFileNameRepository repository) {
+		this.repository = repository;
+	}
+
+	@Override
+	protected void realRun(final ApplicationParameter params) throws Exception {
+		logger.info("Starting ...");		
+		final String filesPath = params.getPathOfPayload() + SUB_PATH_FILES;
+		
+		//make dir /files and empty if exist
+		final File t = new File(filesPath);		
+		delete(t);			
+		t.mkdir();
+		
+		System.out.println("Start splitter of general query log file");
+		final List<TimerConnectionAggregator> data = new SplitGeneralQueryLogFile().run(params.generalQueryLogPath(), filesPath);
+		
+		System.out.println("Start search LOAD DATA into general query log file");
+		final List<Integer> idsWithLoadData = new SearchLoadDataStatement().run(params.generalQueryLogPath());
+		
+		if (idsWithLoadData.isEmpty()) {
+			System.out.println("Start schedule of " + data.size() + " connection's");
+			schedule(params.getNumberOfThread(), data, filesPath, null, params.getDatabaseServer(), params.getPathOfPayload());											
+		} else {
+			
+			/*
+			 * da riscrivere se servirà ... così non funziona !!'
+			 */
+			
+//			logger.info("Start searching of real file name of LOAD DATA");
+//			for (TimerConnectionAggregator tca : data) {
+//				final List<Integer> intersection = ListUtils.intersection(Lists.newArrayList(tca.getIds()), idsWithLoadData);
+//				((GrepLoadDataFileNameRepository)repository).run(intersection, params.binaryLogDirPath());
+//				
+//				for (Entry<Integer, String[]> e : run.entrySet()) {
+//					tca.addLoadData(e.getKey(), e.getValue());
+//				}
+//			}
+//			
+//			System.out.println("Start schedule of " + data.size() + " connection's and " + idsWithLoadData.size() + " load data");
+//			schedule(params.getNumberOfThread(), data, filesPath, params.loadDataDirPath(), params.getDatabaseServer(), params.getPathOfPayload()); 	
+		}
+	}
+	
+	private void delete(File file) throws IOException {
+		if (file.exists() && file.isDirectory()) {
+			// directory is empty, then delete it
+			if (file.list().length == 0) {
+				file.delete();
+			} else {
+				// list all the directory contents
+				final String files[] = file.list();
+
+				for (String temp : files) {
+					// construct the file structure
+					final File fileDelete = new File(file, temp);
+
+					// recursive delete
+					delete(fileDelete);
+				}
+
+				// check the directory again, if empty then delete it
+				if (file.list().length == 0) {
+					file.delete();
+				}
+			}
+		} else {
+			// if file, then delete it
+			file.delete();
+		}
+	}
+	
+	private void schedule(int numberOfThread, List<TimerConnectionAggregator> data, String filesPath, String loadDatasPath, String dbHostName, String generalLogDirPath) {
+		final List<ScheduledFuture<PayloadAsync>> futureData = new ArrayList<ScheduledFuture<PayloadAsync>>();						
+
+		addHookForCancelTask(futureData);
+		
+		final ScheduledExecutorService pool = Executors.newScheduledThreadPool(numberOfThread);
+		
+		try {
+			final DataSource ds = buildDataSource(dbHostName, numberOfThread);			
+			long current = 0;
+			
+			for (TimerConnectionAggregator tca : data) {
+				current += tca.getDelay();
+				
+				futureData.add(
+					pool.schedule(
+						new MyCallable(tca, filesPath, loadDatasPath, ds), 
+						current, 
+						TimeUnit.MILLISECONDS
+					)
+				);
+			}			
+		} catch (PropertyVetoException e) {
+			e.printStackTrace();
+		}
+		
+		logger.info("thread pool shutdown");
+		pool.shutdown();		
+		
+		try {
+			logger.info("thread pool awaitTermination");
+			pool.awaitTermination(Long.MAX_VALUE, TimeUnit.SECONDS);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+//		addHookForPartialResultWriter(futureData, generalLogDirPath);
+	}
+	
+}

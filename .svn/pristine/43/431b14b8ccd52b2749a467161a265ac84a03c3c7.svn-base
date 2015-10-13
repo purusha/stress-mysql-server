@@ -1,0 +1,67 @@
+package runner.contactlab.com;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.List;
+import java.util.concurrent.Callable;
+
+import javax.sql.DataSource;
+
+import script.contactlab.com.ConnectionScanner;
+import script.contactlab.com.TimerConnectionAggregator;
+
+public class MyCallable implements Callable<PayloadAsync> {
+	
+	private TimerConnectionAggregator tca;
+	private String filesPath;
+	private String loadDatasPath;
+	private DataSource ds;
+
+	public MyCallable(TimerConnectionAggregator tca, String filesPath, String loadDatasPath, DataSource ds) {
+		this.tca = tca;
+		this.filesPath = filesPath;
+		this.loadDatasPath = loadDatasPath;
+		this.ds = ds;
+	}
+
+	@Override
+	public PayloadAsync call() throws Exception {		
+		final List<Integer> ids = tca.getIds();
+		
+		for (Integer id : ids) {			
+//			final LineNumberReader lnr = new LineNumberReader(
+//				new BufferedReader(new InputStreamReader(
+//					new FileInputStream(filesPath + id)
+//				))
+//			);
+//						
+//			lnr.skip(Long.MAX_VALUE);
+//			System.err.println("On connection: " + id + " found lines: " + lnr.getLineNumber() + " and fileNames: " + tca.getLoadData(id));
+//			lnr.close();
+			
+			final Connection connection = ds.getConnection();
+			
+			for (String sql : new ConnectionScanner(filesPath + id).buildStatemens()) {
+				final Statement stmt = connection.createStatement();				
+				
+//				TODO:
+//					nel caso in cui sql sia una 'LOAD DATA'  devo prendere il nome corretto del file
+//					ed il suo percorso da tca
+				
+				try {
+					System.err.println("execute> " + sql);
+					System.err.println("result> " + stmt.execute(sql) + "\n");
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				} finally {
+					stmt.close();
+				}
+			}
+			
+			connection.close();
+		}
+		
+		return null;
+	}
+}

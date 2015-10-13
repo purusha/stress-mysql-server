@@ -1,0 +1,59 @@
+package script.contactlab.com;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ScheduledFuture;
+
+import runner.contactlab.com.PayloadAsync;
+
+public class PrintResult {
+	
+	public void print(List<ScheduledFuture<PayloadAsync>> scheduleResult, String pathOfResult) throws InterruptedException, ExecutionException {		
+		final StringBuffer sb = new StringBuffer();		
+		sb.append("<!DOCTYPE html><html><body><table border=\"1\" style=\"width:100%; border: 1px solid black;\">");
+		
+		sb.append("<tr>");
+		sb.append("<th>Thread ID</th>");
+		sb.append("<th>Number of Connection</th>");
+		sb.append("<th>Number of Statement</th>");
+		sb.append("<th>Max exec. time (ms)</th>");
+		sb.append("<th>Min exec. time (ms)</th>");
+		sb.append("<th>Average exec. time (ms)</th>");
+		sb.append("<th>Connection Id's</th>");
+		sb.append("</tr>\n");
+		
+		int i = 0;
+		for (ScheduledFuture<PayloadAsync> scheduledFuture : scheduleResult) {
+			final PayloadAsync payloadAsync = scheduledFuture.get();			
+			
+			sb.append("<tr>");
+			sb.append("<td>" + (i++) + "</td>");
+			sb.append("<td>" + payloadAsync.getNumberOfConnection() + "</td>");
+			sb.append("<td>" + payloadAsync.getNumberOfStatement() + "</td>");			
+			sb.append("<td>" + payloadAsync.getMaxStatementExecution() + "</td>");
+			sb.append("<td>" + payloadAsync.getMinStatementExecution() + "</td>");
+			sb.append("<td>" + payloadAsync.getAverageStatementExecution() + "</td>");
+			sb.append("<td>" + payloadAsync.getAllConnectionsId() + "</td>");
+			sb.append("</tr>\n");
+		}
+		
+		sb.append("</table></body></html>");		
+		writeToFile(pathOfResult + "/" + System.currentTimeMillis() + ".html", sb);
+	}
+	
+	private void writeToFile(String pFilename, StringBuffer pData) {
+		try {
+			final BufferedWriter out = new BufferedWriter(new FileWriter(pFilename));
+			
+	        out.write(pData.toString());
+	        out.flush();
+	        out.close();
+		} catch (IOException e) {
+			e.printStackTrace(System.err);
+		}        
+    }	
+
+}

@@ -1,0 +1,23 @@
+package script.contactlab.com;
+
+import static org.junit.Assert.*;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+public class ApplicationCheckPointCounterTest {
+
+	@Test
+	public void test() {
+		final ApplicationCheckPointCounter count = new ApplicationCheckPointCounter();		
+		count.totalNumber(100);
+		
+		count.partialNumber(15);
+		System.err.println(count.build());
+		
+		count.partialNumber(30);
+		System.err.println(count.build());
+	}
+
+}

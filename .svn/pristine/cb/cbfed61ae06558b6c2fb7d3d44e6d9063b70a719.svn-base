@@ -1,0 +1,79 @@
+package script.contactlab.com;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.List;
+
+import com.google.common.collect.Lists;
+
+public class WriteEachLine extends ParsingUtil {
+		
+	private int previousConnectionId = -1;
+	private Long currentDelay = -1L;
+	private List<Integer> currentIds = null;
+	private String parentDir = null;	
+	
+	public WriteEachLine(String parentDir) {
+		this.parentDir = parentDir;		
+	}
+	
+	public List<TimerConnectionAggregator> run(BufferedReader br) throws IOException {
+		final List<TimerConnectionAggregator> data = Lists.newArrayList();
+		
+		String strLine;
+		while ((strLine = br.readLine()) != null) {
+			if (isUsefulLine(strLine)) {
+				final Integer connectionId = retriveConnectionId(strLine);
+				
+				if (connectionId != null) {
+					previousConnectionId = connectionId;
+				}				
+				
+				appendToConnectionFile(strLine, previousConnectionId);
+				
+				if (contains(strLine, CONNECT)) {
+					final Long delay = retriveDelay(strLine);
+					
+					if (delay != null) {						
+						if (currentDelay != -1 && !currentIds.isEmpty()) {
+							data.add(new TimerConnectionAggregator(currentDelay, currentIds));
+						}
+						
+						currentDelay = delay;
+						currentIds = Lists.newArrayList(previousConnectionId);	
+					} else {
+						currentIds.add(previousConnectionId);
+					}
+				}
+			} else if (isUselessLine(strLine)) {
+				/* DO NOTHING */
+			} else {
+				/* QUERY CHE VANNO A CAPO NEL FILE !!? */				
+				appendToConnectionFile(strLine, previousConnectionId); 
+			}
+		}
+		
+		//altrimenti mi perdo l'ultimo connectionId con le sue query
+		data.add(new TimerConnectionAggregator(currentDelay, currentIds));
+
+		//riscrivo i delay per ogni singolo elemento
+		for (int i = data.size() - 1; i > 0; i--) {
+			data.get(i).setDelay(
+				data.get(i).getDelay() - data.get(i - 1).getDelay()
+			);
+		}
+		//il primo delay parte da 0
+		data.get(0).setDelay(0L);
+		
+		return data;
+	}
+
+	private void appendToConnectionFile(String strLine, final Integer connectionId) throws IOException {
+		final BufferedWriter writer = new BufferedWriter(new FileWriter(parentDir + connectionId, true));
+		
+		writer.append(strLine + "\n");		
+		writer.close();
+	}
+}

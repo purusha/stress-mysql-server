@@ -1,0 +1,353 @@
+150120 10:18:46	   51 Connect	C3000116@jrhel63so-tw-hc1.contactlab.test on 
+		   51 Query	/* mysql-connector-java-commercial-5.1.32 ( Revision: jess.balint@oracle.com-20140716155848-mlwabor66widht1n ) */SHOW VARIABLES WHERE Variable_name ='language' OR Variable_name = 'net_write_timeout' OR Variable_name = 'interactive_timeout' OR Variable_name = 'wait_timeout' OR Variable_name = 'character_set_client' OR Variable_name = 'character_set_connection' OR Variable_name = 'character_set' OR Variable_name = 'character_set_server' OR Variable_name = 'tx_isolation' OR Variable_name = 'transaction_isolation' OR Variable_name = 'character_set_results' OR Variable_name = 'timezone' OR Variable_name = 'time_zone' OR Variable_name = 'system_time_zone' OR Variable_name = 'lower_case_table_names' OR Variable_name = 'max_allowed_packet' OR Variable_name = 'net_buffer_length' OR Variable_name = 'sql_mode' OR Variable_name = 'query_cache_type' OR Variable_name = 'query_cache_size' OR Variable_name = 'license' OR Variable_name = 'init_connect'
+		   51 Query	/* mysql-connector-java-commercial-5.1.32 ( Revision: jess.balint@oracle.com-20140716155848-mlwabor66widht1n ) */SELECT @@session.auto_increment_increment
+		   51 Query	SET NAMES latin1
+		   51 Query	SET character_set_results = NULL
+		   51 Query	SET autocommit=1
+		   51 Query	SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED
+		   51 Query	USE C3000116
+		   51 Query	/* criteria query */ select this_.`id` as id1_59_0_, this_.`certificate_component_id` as certific2_59_0_, this_.`certificate_id` as certific3_59_0_, this_.`inserted_at` as inserted4_59_0_, this_.`last_modified_at` as last_mod5_59_0_, this_.`validated` as validate6_59_0_, this_.`value` as value7_59_0_, this_.`version_by` as version_8_59_0_ from `srv_mob_mobile_application_certificate_composition` this_ where this_.`certificate_id`=4792
+		   51 Query	SHOW WARNINGS
+		   51 Query	USE clabanchor
+		   52 Connect	C3000100@grndrt.contactlab.test on C3000100
+		   52 Query	/* mysql-connector-java-5.1.21 ( Revision: ${bzr.revision-id} ) */SHOW VARIABLES WHERE Variable_name ='language' OR Variable_name = 'net_write_timeout' OR Variable_name = 'interactive_timeout' OR Variable_name = 'wait_timeout' OR Variable_name = 'character_set_client' OR Variable_name = 'character_set_connection' OR Variable_name = 'character_set' OR Variable_name = 'character_set_server' OR Variable_name = 'tx_isolation' OR Variable_name = 'transaction_isolation' OR Variable_name = 'character_set_results' OR Variable_name = 'timezone' OR Variable_name = 'time_zone' OR Variable_name = 'system_time_zone' OR Variable_name = 'lower_case_table_names' OR Variable_name = 'max_allowed_packet' OR Variable_name = 'net_buffer_length' OR Variable_name = 'sql_mode' OR Variable_name = 'query_cache_type' OR Variable_name = 'query_cache_size' OR Variable_name = 'init_connect'
+		   52 Query	/* mysql-connector-java-5.1.21 ( Revision: ${bzr.revision-id} ) */SELECT @@session.auto_increment_increment
+		   52 Query	SHOW COLLATION
+		   52 Query	SET NAMES latin1
+		   52 Query	SET character_set_results = NULL
+		   52 Query	SET autocommit=1
+		   52 Query	SET sql_mode='STRICT_TRANS_TABLES'
+		   52 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = -2 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   52 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000100`
+		   52 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = -1 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   52 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000100`
+		   53 Connect	C3000127@jrhel63so-tw-hc1.contactlab.test on 
+		   53 Query	/* mysql-connector-java-commercial-5.1.32 ( Revision: jess.balint@oracle.com-20140716155848-mlwabor66widht1n ) */SHOW VARIABLES WHERE Variable_name ='language' OR Variable_name = 'net_write_timeout' OR Variable_name = 'interactive_timeout' OR Variable_name = 'wait_timeout' OR Variable_name = 'character_set_client' OR Variable_name = 'character_set_connection' OR Variable_name = 'character_set' OR Variable_name = 'character_set_server' OR Variable_name = 'tx_isolation' OR Variable_name = 'transaction_isolation' OR Variable_name = 'character_set_results' OR Variable_name = 'timezone' OR Variable_name = 'time_zone' OR Variable_name = 'system_time_zone' OR Variable_name = 'lower_case_table_names' OR Variable_name = 'max_allowed_packet' OR Variable_name = 'net_buffer_length' OR Variable_name = 'sql_mode' OR Variable_name = 'query_cache_type' OR Variable_name = 'query_cache_size' OR Variable_name = 'license' OR Variable_name = 'init_connect'
+		   53 Query	/* mysql-connector-java-commercial-5.1.32 ( Revision: jess.balint@oracle.com-20140716155848-mlwabor66widht1n ) */SELECT @@session.auto_increment_increment
+		   53 Query	SET NAMES latin1
+		   53 Query	SET character_set_results = NULL
+		   52 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = 2 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   53 Query	SET autocommit=1
+		   53 Query	SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED
+		   52 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000100`
+		   53 Query	USE C3000127
+		   53 Query	/* criteria query */ select this_.`id` as id1_59_0_, this_.`certificate_component_id` as certific2_59_0_, this_.`certificate_id` as certific3_59_0_, this_.`inserted_at` as inserted4_59_0_, this_.`last_modified_at` as last_mod5_59_0_, this_.`validated` as validate6_59_0_, this_.`value` as value7_59_0_, this_.`version_by` as version_8_59_0_ from `srv_mob_mobile_application_certificate_composition` this_ where this_.`certificate_id`=4793
+		   52 Query	SELECT * FROM MLR_TA_JOB WHERE DELIVERY_ID = 17434574
+		   52 Query	SELECT `C3000100`.`MLR_TA_DELIVERY`.`DELIVERY_ID`,`C3000100`.`MLR_TA_DELIVERY`.`TEMPLATE_ID`,`C3000100`.`MLR_TA_DELIVERY`.`MASTER_TEMPLATE_ID`,`C3000100`.`MLR_TA_DELIVERY`.`NEWSLETTER_ID`,`C3000100`.`MLR_TA_DELIVERY`.`LABEL`,`C3000100`.`MLR_TA_DELIVERY`.`START_DATE`,`C3000100`.`MLR_TA_DELIVERY`.`END_DATE`,`C3000100`.`MLR_TA_DELIVERY`.`SCHEDULE_DATE`,`C3000100`.`MLR_TA_DELIVERY`.`STATUS`,`C3000100`.`MLR_TA_DELIVERY`.`IS_TEST`,`C3000100`.`MLR_TA_DELIVERY`.`IS_TRIGGERED`,`C3000100`.`MLR_TA_DELIVERY`.`ARCHIVED`,`C3000100`.`MLR_TA_DELIVERY`.`RECIPIENTS`,`C3000100`.`MLR_TA_DELIVERY`.`BOUNCED`,`C3000100`.`MLR_TA_DELIVERY`.`ROLE`,`C3000100`.`MLR_TA_DELIVERY`.`PARENT_ID`,`C3000100`.`MLR_TA_DELIVERY`.`COMMUNICATION_CATEGORY_ID`,`C3000100`.`MLR_TA_DELIVERY`.`VERSION_DATE`,`C3000100`.`MLR_TA_DELIVERY`.`VERSION_BY`,`C3000100`.`MLR_TA_DELIVERY`.`remove_duplicates` FROM `C3000100`.`MLR_TA_DELIVERY` WHERE `C3000100`.`MLR_TA_DELIVERY`.`DELIVERY_ID`<=>17434574
+		   52 Query	SHOW TABLES LIKE 'MLR_TA_MAILQ_17434574'
+		   52 Query	SELECT * FROM MLR_TA_JOB WHERE DELIVERY_ID = 17434607
+		   52 Query	SELECT `C3000100`.`MLR_TA_DELIVERY`.`DELIVERY_ID`,`C3000100`.`MLR_TA_DELIVERY`.`TEMPLATE_ID`,`C3000100`.`MLR_TA_DELIVERY`.`MASTER_TEMPLATE_ID`,`C3000100`.`MLR_TA_DELIVERY`.`NEWSLETTER_ID`,`C3000100`.`MLR_TA_DELIVERY`.`LABEL`,`C3000100`.`MLR_TA_DELIVERY`.`START_DATE`,`C3000100`.`MLR_TA_DELIVERY`.`END_DATE`,`C3000100`.`MLR_TA_DELIVERY`.`SCHEDULE_DATE`,`C3000100`.`MLR_TA_DELIVERY`.`STATUS`,`C3000100`.`MLR_TA_DELIVERY`.`IS_TEST`,`C3000100`.`MLR_TA_DELIVERY`.`IS_TRIGGERED`,`C3000100`.`MLR_TA_DELIVERY`.`ARCHIVED`,`C3000100`.`MLR_TA_DELIVERY`.`RECIPIENTS`,`C3000100`.`MLR_TA_DELIVERY`.`BOUNCED`,`C3000100`.`MLR_TA_DELIVERY`.`ROLE`,`C3000100`.`MLR_TA_DELIVERY`.`PARENT_ID`,`C3000100`.`MLR_TA_DELIVERY`.`COMMUNICATION_CATEGORY_ID`,`C3000100`.`MLR_TA_DELIVERY`.`VERSION_DATE`,`C3000100`.`MLR_TA_DELIVERY`.`VERSION_BY`,`C3000100`.`MLR_TA_DELIVERY`.`remove_duplicates` FROM `C3000100`.`MLR_TA_DELIVERY` WHERE `C3000100`.`MLR_TA_DELIVERY`.`DELIVERY_ID`<=>17434607
+		   53 Query	SHOW WARNINGS
+		   52 Query	SHOW TABLES LIKE 'MLR_TA_MAILQ_17434607'
+		   53 Query	USE clabanchor
+		   52 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS IN (9,10) AND ROLE IN (1,2)
+		   52 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000100`
+		   52 Query	SELECT  COUNT(*) as childs,  IFNULL(SUM(IF(STATUS NOT IN (3,-3), 1, 0)),0) as pending FROM MLR_TA_DELIVERY WHERE ROLE > 100 AND PARENT_ID = 17434850
+		   52 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = 11 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   52 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000100`
+		   52 Quit	
+		   54 Connect	C3000119@grndrt.contactlab.test on C3000119
+		   54 Query	/* mysql-connector-java-5.1.21 ( Revision: ${bzr.revision-id} ) */SHOW VARIABLES WHERE Variable_name ='language' OR Variable_name = 'net_write_timeout' OR Variable_name = 'interactive_timeout' OR Variable_name = 'wait_timeout' OR Variable_name = 'character_set_client' OR Variable_name = 'character_set_connection' OR Variable_name = 'character_set' OR Variable_name = 'character_set_server' OR Variable_name = 'tx_isolation' OR Variable_name = 'transaction_isolation' OR Variable_name = 'character_set_results' OR Variable_name = 'timezone' OR Variable_name = 'time_zone' OR Variable_name = 'system_time_zone' OR Variable_name = 'lower_case_table_names' OR Variable_name = 'max_allowed_packet' OR Variable_name = 'net_buffer_length' OR Variable_name = 'sql_mode' OR Variable_name = 'query_cache_type' OR Variable_name = 'query_cache_size' OR Variable_name = 'init_connect'
+		   54 Query	/* mysql-connector-java-5.1.21 ( Revision: ${bzr.revision-id} ) */SELECT @@session.auto_increment_increment
+		   54 Query	SHOW COLLATION
+		   54 Query	SET NAMES latin1
+		   54 Query	SET character_set_results = NULL
+		   54 Query	SET autocommit=1
+		   54 Query	SET sql_mode='STRICT_TRANS_TABLES'
+		   54 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = -2 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   54 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000119`
+		   54 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = -1 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   54 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000119`
+		   54 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = 2 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   54 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000119`
+		   54 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS IN (9,10) AND ROLE IN (1,2)
+		   54 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000119`
+		   54 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = 11 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   54 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000119`
+		   54 Quit	
+		   55 Connect	C3000158@grndrt.contactlab.test on C3000158
+		   55 Query	/* mysql-connector-java-5.1.21 ( Revision: ${bzr.revision-id} ) */SHOW VARIABLES WHERE Variable_name ='language' OR Variable_name = 'net_write_timeout' OR Variable_name = 'interactive_timeout' OR Variable_name = 'wait_timeout' OR Variable_name = 'character_set_client' OR Variable_name = 'character_set_connection' OR Variable_name = 'character_set' OR Variable_name = 'character_set_server' OR Variable_name = 'tx_isolation' OR Variable_name = 'transaction_isolation' OR Variable_name = 'character_set_results' OR Variable_name = 'timezone' OR Variable_name = 'time_zone' OR Variable_name = 'system_time_zone' OR Variable_name = 'lower_case_table_names' OR Variable_name = 'max_allowed_packet' OR Variable_name = 'net_buffer_length' OR Variable_name = 'sql_mode' OR Variable_name = 'query_cache_type' OR Variable_name = 'query_cache_size' OR Variable_name = 'init_connect'
+		   55 Query	/* mysql-connector-java-5.1.21 ( Revision: ${bzr.revision-id} ) */SELECT @@session.auto_increment_increment
+		   55 Query	SHOW COLLATION
+		   55 Query	SET NAMES latin1
+		   55 Query	SET character_set_results = NULL
+		   55 Query	SET autocommit=1
+		   55 Query	SET sql_mode='STRICT_TRANS_TABLES'
+		   55 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = -2 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   55 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000158`
+		   55 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = -1 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   55 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000158`
+		   55 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = 2 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   55 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000158`
+		   55 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS IN (9,10) AND ROLE IN (1,2)
+		   55 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000158`
+		   55 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = 11 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   55 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000158`
+		   55 Quit	
+		   56 Connect	C3000111@grndrt.contactlab.test on C3000111
+		   56 Query	/* mysql-connector-java-5.1.21 ( Revision: ${bzr.revision-id} ) */SHOW VARIABLES WHERE Variable_name ='language' OR Variable_name = 'net_write_timeout' OR Variable_name = 'interactive_timeout' OR Variable_name = 'wait_timeout' OR Variable_name = 'character_set_client' OR Variable_name = 'character_set_connection' OR Variable_name = 'character_set' OR Variable_name = 'character_set_server' OR Variable_name = 'tx_isolation' OR Variable_name = 'transaction_isolation' OR Variable_name = 'character_set_results' OR Variable_name = 'timezone' OR Variable_name = 'time_zone' OR Variable_name = 'system_time_zone' OR Variable_name = 'lower_case_table_names' OR Variable_name = 'max_allowed_packet' OR Variable_name = 'net_buffer_length' OR Variable_name = 'sql_mode' OR Variable_name = 'query_cache_type' OR Variable_name = 'query_cache_size' OR Variable_name = 'init_connect'
+		   56 Query	/* mysql-connector-java-5.1.21 ( Revision: ${bzr.revision-id} ) */SELECT @@session.auto_increment_increment
+		   56 Query	SHOW COLLATION
+		   56 Query	SET NAMES latin1
+		   56 Query	SET character_set_results = NULL
+		   56 Query	SET autocommit=1
+		   56 Query	SET sql_mode='STRICT_TRANS_TABLES'
+		   56 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = -2 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   56 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000111`
+		   56 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = -1 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   56 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000111`
+		   56 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = 2 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   56 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000111`
+		   56 Query	SELECT * FROM MLR_TA_JOB WHERE DELIVERY_ID = 788
+		   56 Query	SELECT `C3000111`.`MLR_TA_DELIVERY`.`DELIVERY_ID`,`C3000111`.`MLR_TA_DELIVERY`.`TEMPLATE_ID`,`C3000111`.`MLR_TA_DELIVERY`.`MASTER_TEMPLATE_ID`,`C3000111`.`MLR_TA_DELIVERY`.`NEWSLETTER_ID`,`C3000111`.`MLR_TA_DELIVERY`.`LABEL`,`C3000111`.`MLR_TA_DELIVERY`.`START_DATE`,`C3000111`.`MLR_TA_DELIVERY`.`END_DATE`,`C3000111`.`MLR_TA_DELIVERY`.`SCHEDULE_DATE`,`C3000111`.`MLR_TA_DELIVERY`.`STATUS`,`C3000111`.`MLR_TA_DELIVERY`.`IS_TEST`,`C3000111`.`MLR_TA_DELIVERY`.`IS_TRIGGERED`,`C3000111`.`MLR_TA_DELIVERY`.`ARCHIVED`,`C3000111`.`MLR_TA_DELIVERY`.`RECIPIENTS`,`C3000111`.`MLR_TA_DELIVERY`.`BOUNCED`,`C3000111`.`MLR_TA_DELIVERY`.`ROLE`,`C3000111`.`MLR_TA_DELIVERY`.`PARENT_ID`,`C3000111`.`MLR_TA_DELIVERY`.`COMMUNICATION_CATEGORY_ID`,`C3000111`.`MLR_TA_DELIVERY`.`VERSION_DATE`,`C3000111`.`MLR_TA_DELIVERY`.`VERSION_BY`,`C3000111`.`MLR_TA_DELIVERY`.`remove_duplicates` FROM `C3000111`.`MLR_TA_DELIVERY` WHERE `C3000111`.`MLR_TA_DELIVERY`.`DELIVERY_ID`<=>788
+		   56 Query	SHOW TABLES LIKE 'MLR_TA_MAILQ_788'
+		   56 Query	SELECT * FROM MLR_TA_JOB WHERE DELIVERY_ID = 8862
+		   56 Query	SELECT `C3000111`.`MLR_TA_DELIVERY`.`DELIVERY_ID`,`C3000111`.`MLR_TA_DELIVERY`.`TEMPLATE_ID`,`C3000111`.`MLR_TA_DELIVERY`.`MASTER_TEMPLATE_ID`,`C3000111`.`MLR_TA_DELIVERY`.`NEWSLETTER_ID`,`C3000111`.`MLR_TA_DELIVERY`.`LABEL`,`C3000111`.`MLR_TA_DELIVERY`.`START_DATE`,`C3000111`.`MLR_TA_DELIVERY`.`END_DATE`,`C3000111`.`MLR_TA_DELIVERY`.`SCHEDULE_DATE`,`C3000111`.`MLR_TA_DELIVERY`.`STATUS`,`C3000111`.`MLR_TA_DELIVERY`.`IS_TEST`,`C3000111`.`MLR_TA_DELIVERY`.`IS_TRIGGERED`,`C3000111`.`MLR_TA_DELIVERY`.`ARCHIVED`,`C3000111`.`MLR_TA_DELIVERY`.`RECIPIENTS`,`C3000111`.`MLR_TA_DELIVERY`.`BOUNCED`,`C3000111`.`MLR_TA_DELIVERY`.`ROLE`,`C3000111`.`MLR_TA_DELIVERY`.`PARENT_ID`,`C3000111`.`MLR_TA_DELIVERY`.`COMMUNICATION_CATEGORY_ID`,`C3000111`.`MLR_TA_DELIVERY`.`VERSION_DATE`,`C3000111`.`MLR_TA_DELIVERY`.`VERSION_BY`,`C3000111`.`MLR_TA_DELIVERY`.`remove_duplicates` FROM `C3000111`.`MLR_TA_DELIVERY` WHERE `C3000111`.`MLR_TA_DELIVERY`.`DELIVERY_ID`<=>8862
+		   56 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS IN (9,10) AND ROLE IN (1,2)
+		   56 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000111`
+		   56 Query	SELECT  COUNT(*) as childs,  IFNULL(SUM(IF(STATUS NOT IN (3,-3), 1, 0)),0) as pending FROM MLR_TA_DELIVERY WHERE ROLE > 100 AND PARENT_ID = 8254
+		   56 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = 11 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   56 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000111`
+		   56 Quit	
+		   57 Connect	C3000114@grndrt.contactlab.test on C3000114
+		   57 Query	/* mysql-connector-java-5.1.21 ( Revision: ${bzr.revision-id} ) */SHOW VARIABLES WHERE Variable_name ='language' OR Variable_name = 'net_write_timeout' OR Variable_name = 'interactive_timeout' OR Variable_name = 'wait_timeout' OR Variable_name = 'character_set_client' OR Variable_name = 'character_set_connection' OR Variable_name = 'character_set' OR Variable_name = 'character_set_server' OR Variable_name = 'tx_isolation' OR Variable_name = 'transaction_isolation' OR Variable_name = 'character_set_results' OR Variable_name = 'timezone' OR Variable_name = 'time_zone' OR Variable_name = 'system_time_zone' OR Variable_name = 'lower_case_table_names' OR Variable_name = 'max_allowed_packet' OR Variable_name = 'net_buffer_length' OR Variable_name = 'sql_mode' OR Variable_name = 'query_cache_type' OR Variable_name = 'query_cache_size' OR Variable_name = 'init_connect'
+		   57 Query	/* mysql-connector-java-5.1.21 ( Revision: ${bzr.revision-id} ) */SELECT @@session.auto_increment_increment
+		   57 Query	SHOW COLLATION
+		   57 Query	SET NAMES latin1
+		   57 Query	SET character_set_results = NULL
+		   57 Query	SET autocommit=1
+		   57 Query	SET sql_mode='STRICT_TRANS_TABLES'
+		   57 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = -2 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   57 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000114`
+		   57 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = -1 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   57 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000114`
+		   57 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = 2 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   57 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000114`
+		   57 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS IN (9,10) AND ROLE IN (1,2)
+		   57 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000114`
+		   57 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = 11 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   57 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000114`
+		   57 Quit	
+		   58 Connect	C3000124@grndrt.contactlab.test on C3000124
+		   58 Query	/* mysql-connector-java-5.1.21 ( Revision: ${bzr.revision-id} ) */SHOW VARIABLES WHERE Variable_name ='language' OR Variable_name = 'net_write_timeout' OR Variable_name = 'interactive_timeout' OR Variable_name = 'wait_timeout' OR Variable_name = 'character_set_client' OR Variable_name = 'character_set_connection' OR Variable_name = 'character_set' OR Variable_name = 'character_set_server' OR Variable_name = 'tx_isolation' OR Variable_name = 'transaction_isolation' OR Variable_name = 'character_set_results' OR Variable_name = 'timezone' OR Variable_name = 'time_zone' OR Variable_name = 'system_time_zone' OR Variable_name = 'lower_case_table_names' OR Variable_name = 'max_allowed_packet' OR Variable_name = 'net_buffer_length' OR Variable_name = 'sql_mode' OR Variable_name = 'query_cache_type' OR Variable_name = 'query_cache_size' OR Variable_name = 'init_connect'
+		   58 Query	/* mysql-connector-java-5.1.21 ( Revision: ${bzr.revision-id} ) */SELECT @@session.auto_increment_increment
+		   58 Query	SHOW COLLATION
+		   58 Query	SET NAMES latin1
+		   58 Query	SET character_set_results = NULL
+		   58 Query	SET autocommit=1
+		   58 Query	SET sql_mode='STRICT_TRANS_TABLES'
+		   58 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = -2 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   58 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000124`
+		   58 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = -1 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   58 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000124`
+		   58 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = 2 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   58 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000124`
+		   58 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS IN (9,10) AND ROLE IN (1,2)
+		   58 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000124`
+		   58 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = 11 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   58 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000124`
+		   58 Quit	
+		   59 Connect	C3000103@grndrt.contactlab.test on C3000103
+		   59 Query	/* mysql-connector-java-5.1.21 ( Revision: ${bzr.revision-id} ) */SHOW VARIABLES WHERE Variable_name ='language' OR Variable_name = 'net_write_timeout' OR Variable_name = 'interactive_timeout' OR Variable_name = 'wait_timeout' OR Variable_name = 'character_set_client' OR Variable_name = 'character_set_connection' OR Variable_name = 'character_set' OR Variable_name = 'character_set_server' OR Variable_name = 'tx_isolation' OR Variable_name = 'transaction_isolation' OR Variable_name = 'character_set_results' OR Variable_name = 'timezone' OR Variable_name = 'time_zone' OR Variable_name = 'system_time_zone' OR Variable_name = 'lower_case_table_names' OR Variable_name = 'max_allowed_packet' OR Variable_name = 'net_buffer_length' OR Variable_name = 'sql_mode' OR Variable_name = 'query_cache_type' OR Variable_name = 'query_cache_size' OR Variable_name = 'init_connect'
+		   59 Query	/* mysql-connector-java-5.1.21 ( Revision: ${bzr.revision-id} ) */SELECT @@session.auto_increment_increment
+		   59 Query	SHOW COLLATION
+		   59 Query	SET NAMES latin1
+		   59 Query	SET character_set_results = NULL
+		   59 Query	SET autocommit=1
+		   59 Query	SET sql_mode='STRICT_TRANS_TABLES'
+		   59 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = -2 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   59 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000103`
+		   59 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = -1 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   59 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000103`
+		   59 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = 2 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   59 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000103`
+		   59 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS IN (9,10) AND ROLE IN (1,2)
+		   59 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000103`
+		   59 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = 11 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   59 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000103`
+		   59 Quit	
+		   60 Connect	C3000157@grndrt.contactlab.test on C3000157
+		   60 Query	/* mysql-connector-java-5.1.21 ( Revision: ${bzr.revision-id} ) */SHOW VARIABLES WHERE Variable_name ='language' OR Variable_name = 'net_write_timeout' OR Variable_name = 'interactive_timeout' OR Variable_name = 'wait_timeout' OR Variable_name = 'character_set_client' OR Variable_name = 'character_set_connection' OR Variable_name = 'character_set' OR Variable_name = 'character_set_server' OR Variable_name = 'tx_isolation' OR Variable_name = 'transaction_isolation' OR Variable_name = 'character_set_results' OR Variable_name = 'timezone' OR Variable_name = 'time_zone' OR Variable_name = 'system_time_zone' OR Variable_name = 'lower_case_table_names' OR Variable_name = 'max_allowed_packet' OR Variable_name = 'net_buffer_length' OR Variable_name = 'sql_mode' OR Variable_name = 'query_cache_type' OR Variable_name = 'query_cache_size' OR Variable_name = 'init_connect'
+150120 10:18:47	   60 Query	/* mysql-connector-java-5.1.21 ( Revision: ${bzr.revision-id} ) */SELECT @@session.auto_increment_increment
+		   60 Query	SHOW COLLATION
+		   60 Query	SET NAMES latin1
+		   60 Query	SET character_set_results = NULL
+		   60 Query	SET autocommit=1
+		   60 Query	SET sql_mode='STRICT_TRANS_TABLES'
+		   60 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = -2 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   60 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000157`
+		   60 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = -1 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   60 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000157`
+		   60 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = 2 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   60 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000157`
+		   60 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS IN (9,10) AND ROLE IN (1,2)
+		   60 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000157`
+		   60 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = 11 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   60 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000157`
+		   60 Quit	
+		   61 Connect	C3000118@grndrt.contactlab.test on C3000118
+		   61 Query	/* mysql-connector-java-5.1.21 ( Revision: ${bzr.revision-id} ) */SHOW VARIABLES WHERE Variable_name ='language' OR Variable_name = 'net_write_timeout' OR Variable_name = 'interactive_timeout' OR Variable_name = 'wait_timeout' OR Variable_name = 'character_set_client' OR Variable_name = 'character_set_connection' OR Variable_name = 'character_set' OR Variable_name = 'character_set_server' OR Variable_name = 'tx_isolation' OR Variable_name = 'transaction_isolation' OR Variable_name = 'character_set_results' OR Variable_name = 'timezone' OR Variable_name = 'time_zone' OR Variable_name = 'system_time_zone' OR Variable_name = 'lower_case_table_names' OR Variable_name = 'max_allowed_packet' OR Variable_name = 'net_buffer_length' OR Variable_name = 'sql_mode' OR Variable_name = 'query_cache_type' OR Variable_name = 'query_cache_size' OR Variable_name = 'init_connect'
+		   61 Query	/* mysql-connector-java-5.1.21 ( Revision: ${bzr.revision-id} ) */SELECT @@session.auto_increment_increment
+		   61 Query	SHOW COLLATION
+		   61 Query	SET NAMES latin1
+		   61 Query	SET character_set_results = NULL
+		   61 Query	SET autocommit=1
+		   61 Query	SET sql_mode='STRICT_TRANS_TABLES'
+		   61 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = -2 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   61 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000118`
+		   61 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = -1 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   61 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000118`
+		   61 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = 2 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   61 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000118`
+		   61 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS IN (9,10) AND ROLE IN (1,2)
+		   61 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000118`
+		   61 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = 11 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   61 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000118`
+		   61 Quit	
+		   62 Connect	C3000127@grndrt.contactlab.test on C3000127
+		   62 Query	/* mysql-connector-java-5.1.21 ( Revision: ${bzr.revision-id} ) */SHOW VARIABLES WHERE Variable_name ='language' OR Variable_name = 'net_write_timeout' OR Variable_name = 'interactive_timeout' OR Variable_name = 'wait_timeout' OR Variable_name = 'character_set_client' OR Variable_name = 'character_set_connection' OR Variable_name = 'character_set' OR Variable_name = 'character_set_server' OR Variable_name = 'tx_isolation' OR Variable_name = 'transaction_isolation' OR Variable_name = 'character_set_results' OR Variable_name = 'timezone' OR Variable_name = 'time_zone' OR Variable_name = 'system_time_zone' OR Variable_name = 'lower_case_table_names' OR Variable_name = 'max_allowed_packet' OR Variable_name = 'net_buffer_length' OR Variable_name = 'sql_mode' OR Variable_name = 'query_cache_type' OR Variable_name = 'query_cache_size' OR Variable_name = 'init_connect'
+		   62 Query	/* mysql-connector-java-5.1.21 ( Revision: ${bzr.revision-id} ) */SELECT @@session.auto_increment_increment
+		   62 Query	SHOW COLLATION
+		   62 Query	SET NAMES latin1
+		   62 Query	SET character_set_results = NULL
+		   62 Query	SET autocommit=1
+		   62 Query	SET sql_mode='STRICT_TRANS_TABLES'
+		   62 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = -2 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   62 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000127`
+		   62 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = -1 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   62 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000127`
+		   62 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = 2 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   62 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000127`
+		   62 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS IN (9,10) AND ROLE IN (1,2)
+		   62 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000127`
+		   62 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = 11 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   62 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000127`
+		   62 Quit	
+		   63 Connect	C3000116@grndrt.contactlab.test on C3000116
+		   63 Query	/* mysql-connector-java-5.1.21 ( Revision: ${bzr.revision-id} ) */SHOW VARIABLES WHERE Variable_name ='language' OR Variable_name = 'net_write_timeout' OR Variable_name = 'interactive_timeout' OR Variable_name = 'wait_timeout' OR Variable_name = 'character_set_client' OR Variable_name = 'character_set_connection' OR Variable_name = 'character_set' OR Variable_name = 'character_set_server' OR Variable_name = 'tx_isolation' OR Variable_name = 'transaction_isolation' OR Variable_name = 'character_set_results' OR Variable_name = 'timezone' OR Variable_name = 'time_zone' OR Variable_name = 'system_time_zone' OR Variable_name = 'lower_case_table_names' OR Variable_name = 'max_allowed_packet' OR Variable_name = 'net_buffer_length' OR Variable_name = 'sql_mode' OR Variable_name = 'query_cache_type' OR Variable_name = 'query_cache_size' OR Variable_name = 'init_connect'
+		   63 Query	/* mysql-connector-java-5.1.21 ( Revision: ${bzr.revision-id} ) */SELECT @@session.auto_increment_increment
+		   63 Query	SHOW COLLATION
+		   63 Query	SET NAMES latin1
+		   63 Query	SET character_set_results = NULL
+		   63 Query	SET autocommit=1
+		   63 Query	SET sql_mode='STRICT_TRANS_TABLES'
+		   63 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = -2 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   63 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000116`
+		   63 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = -1 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   63 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000116`
+		   63 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = 2 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   63 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000116`
+		   63 Query	SELECT * FROM MLR_TA_JOB WHERE DELIVERY_ID = 100299
+		   63 Query	SELECT `C3000116`.`MLR_TA_DELIVERY`.`DELIVERY_ID`,`C3000116`.`MLR_TA_DELIVERY`.`TEMPLATE_ID`,`C3000116`.`MLR_TA_DELIVERY`.`MASTER_TEMPLATE_ID`,`C3000116`.`MLR_TA_DELIVERY`.`NEWSLETTER_ID`,`C3000116`.`MLR_TA_DELIVERY`.`LABEL`,`C3000116`.`MLR_TA_DELIVERY`.`START_DATE`,`C3000116`.`MLR_TA_DELIVERY`.`END_DATE`,`C3000116`.`MLR_TA_DELIVERY`.`SCHEDULE_DATE`,`C3000116`.`MLR_TA_DELIVERY`.`STATUS`,`C3000116`.`MLR_TA_DELIVERY`.`IS_TEST`,`C3000116`.`MLR_TA_DELIVERY`.`IS_TRIGGERED`,`C3000116`.`MLR_TA_DELIVERY`.`ARCHIVED`,`C3000116`.`MLR_TA_DELIVERY`.`RECIPIENTS`,`C3000116`.`MLR_TA_DELIVERY`.`BOUNCED`,`C3000116`.`MLR_TA_DELIVERY`.`ROLE`,`C3000116`.`MLR_TA_DELIVERY`.`PARENT_ID`,`C3000116`.`MLR_TA_DELIVERY`.`COMMUNICATION_CATEGORY_ID`,`C3000116`.`MLR_TA_DELIVERY`.`VERSION_DATE`,`C3000116`.`MLR_TA_DELIVERY`.`VERSION_BY`,`C3000116`.`MLR_TA_DELIVERY`.`remove_duplicates` FROM `C3000116`.`MLR_TA_DELIVERY` WHERE `C3000116`.`MLR_TA_DELIVERY`.`DELIVERY_ID`<=>100299
+		   63 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS IN (9,10) AND ROLE IN (1,2)
+		   63 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000116`
+		   63 Query	SELECT  COUNT(*) as childs,  IFNULL(SUM(IF(STATUS NOT IN (3,-3), 1, 0)),0) as pending FROM MLR_TA_DELIVERY WHERE ROLE > 100 AND PARENT_ID = 106526
+		   63 Query	SELECT  COUNT(*) as childs,  IFNULL(SUM(IF(STATUS NOT IN (3,-3), 1, 0)),0) as pending FROM MLR_TA_DELIVERY WHERE ROLE > 100 AND PARENT_ID = 106576
+		   63 Query	SELECT  COUNT(*) as childs,  IFNULL(SUM(IF(STATUS NOT IN (3,-3), 1, 0)),0) as pending FROM MLR_TA_DELIVERY WHERE ROLE > 100 AND PARENT_ID = 106581
+		   63 Query	SELECT  COUNT(*) as childs,  IFNULL(SUM(IF(STATUS NOT IN (3,-3), 1, 0)),0) as pending FROM MLR_TA_DELIVERY WHERE ROLE > 100 AND PARENT_ID = 106585
+		   63 Query	SELECT  COUNT(*) as childs,  IFNULL(SUM(IF(STATUS NOT IN (3,-3), 1, 0)),0) as pending FROM MLR_TA_DELIVERY WHERE ROLE > 100 AND PARENT_ID = 106590
+		   63 Query	SELECT  COUNT(*) as childs,  IFNULL(SUM(IF(STATUS NOT IN (3,-3), 1, 0)),0) as pending FROM MLR_TA_DELIVERY WHERE ROLE > 100 AND PARENT_ID = 106594
+		   63 Query	SELECT  COUNT(*) as childs,  IFNULL(SUM(IF(STATUS NOT IN (3,-3), 1, 0)),0) as pending FROM MLR_TA_DELIVERY WHERE ROLE > 100 AND PARENT_ID = 106600
+		   63 Query	SELECT  COUNT(*) as childs,  IFNULL(SUM(IF(STATUS NOT IN (3,-3), 1, 0)),0) as pending FROM MLR_TA_DELIVERY WHERE ROLE > 100 AND PARENT_ID = 106605
+		   63 Query	SELECT  COUNT(*) as childs,  IFNULL(SUM(IF(STATUS NOT IN (3,-3), 1, 0)),0) as pending FROM MLR_TA_DELIVERY WHERE ROLE > 100 AND PARENT_ID = 106889
+		   63 Query	SELECT  COUNT(*) as childs,  IFNULL(SUM(IF(STATUS NOT IN (3,-3), 1, 0)),0) as pending FROM MLR_TA_DELIVERY WHERE ROLE > 100 AND PARENT_ID = 106916
+		   63 Query	SELECT  COUNT(*) as childs,  IFNULL(SUM(IF(STATUS NOT IN (3,-3), 1, 0)),0) as pending FROM MLR_TA_DELIVERY WHERE ROLE > 100 AND PARENT_ID = 106921
+		   63 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = 11 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   63 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000116`
+		   63 Quit	
+		   64 Connect	C3000120@grndrt.contactlab.test on C3000120
+		   64 Query	/* mysql-connector-java-5.1.21 ( Revision: ${bzr.revision-id} ) */SHOW VARIABLES WHERE Variable_name ='language' OR Variable_name = 'net_write_timeout' OR Variable_name = 'interactive_timeout' OR Variable_name = 'wait_timeout' OR Variable_name = 'character_set_client' OR Variable_name = 'character_set_connection' OR Variable_name = 'character_set' OR Variable_name = 'character_set_server' OR Variable_name = 'tx_isolation' OR Variable_name = 'transaction_isolation' OR Variable_name = 'character_set_results' OR Variable_name = 'timezone' OR Variable_name = 'time_zone' OR Variable_name = 'system_time_zone' OR Variable_name = 'lower_case_table_names' OR Variable_name = 'max_allowed_packet' OR Variable_name = 'net_buffer_length' OR Variable_name = 'sql_mode' OR Variable_name = 'query_cache_type' OR Variable_name = 'query_cache_size' OR Variable_name = 'init_connect'
+		   64 Query	/* mysql-connector-java-5.1.21 ( Revision: ${bzr.revision-id} ) */SELECT @@session.auto_increment_increment
+		   64 Query	SHOW COLLATION
+		   64 Query	SET NAMES latin1
+		   64 Query	SET character_set_results = NULL
+		   64 Query	SET autocommit=1
+		   64 Query	SET sql_mode='STRICT_TRANS_TABLES'
+		   64 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = -2 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   64 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000120`
+		   64 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = -1 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   64 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000120`
+		   64 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = 2 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   64 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000120`
+		   64 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS IN (9,10) AND ROLE IN (1,2)
+		   64 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000120`
+		   64 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = 11 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   64 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000120`
+		   64 Quit	
+		   65 Connect	C3000154@grndrt.contactlab.test on C3000154
+		   65 Query	/* mysql-connector-java-5.1.21 ( Revision: ${bzr.revision-id} ) */SHOW VARIABLES WHERE Variable_name ='language' OR Variable_name = 'net_write_timeout' OR Variable_name = 'interactive_timeout' OR Variable_name = 'wait_timeout' OR Variable_name = 'character_set_client' OR Variable_name = 'character_set_connection' OR Variable_name = 'character_set' OR Variable_name = 'character_set_server' OR Variable_name = 'tx_isolation' OR Variable_name = 'transaction_isolation' OR Variable_name = 'character_set_results' OR Variable_name = 'timezone' OR Variable_name = 'time_zone' OR Variable_name = 'system_time_zone' OR Variable_name = 'lower_case_table_names' OR Variable_name = 'max_allowed_packet' OR Variable_name = 'net_buffer_length' OR Variable_name = 'sql_mode' OR Variable_name = 'query_cache_type' OR Variable_name = 'query_cache_size' OR Variable_name = 'init_connect'
+		   65 Query	/* mysql-connector-java-5.1.21 ( Revision: ${bzr.revision-id} ) */SELECT @@session.auto_increment_increment
+		   65 Query	SHOW COLLATION
+		   65 Query	SET NAMES latin1
+		   65 Query	SET character_set_results = NULL
+		   65 Query	SET autocommit=1
+		   65 Query	SET sql_mode='STRICT_TRANS_TABLES'
+		   65 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = -2 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   65 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000154`
+		   65 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = -1 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   65 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000154`
+		   65 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = 2 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   65 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000154`
+		   65 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS IN (9,10) AND ROLE IN (1,2)
+		   65 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000154`
+		   65 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = 11 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   65 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000154`
+		   65 Quit	
+		   66 Connect	C3000123@grndrt.contactlab.test on C3000123
+		   66 Query	/* mysql-connector-java-5.1.21 ( Revision: ${bzr.revision-id} ) */SHOW VARIABLES WHERE Variable_name ='language' OR Variable_name = 'net_write_timeout' OR Variable_name = 'interactive_timeout' OR Variable_name = 'wait_timeout' OR Variable_name = 'character_set_client' OR Variable_name = 'character_set_connection' OR Variable_name = 'character_set' OR Variable_name = 'character_set_server' OR Variable_name = 'tx_isolation' OR Variable_name = 'transaction_isolation' OR Variable_name = 'character_set_results' OR Variable_name = 'timezone' OR Variable_name = 'time_zone' OR Variable_name = 'system_time_zone' OR Variable_name = 'lower_case_table_names' OR Variable_name = 'max_allowed_packet' OR Variable_name = 'net_buffer_length' OR Variable_name = 'sql_mode' OR Variable_name = 'query_cache_type' OR Variable_name = 'query_cache_size' OR Variable_name = 'init_connect'
+		   66 Query	/* mysql-connector-java-5.1.21 ( Revision: ${bzr.revision-id} ) */SELECT @@session.auto_increment_increment
+		   66 Query	SHOW COLLATION
+		   66 Query	SET NAMES latin1
+		   66 Query	SET character_set_results = NULL
+		   66 Query	SET autocommit=1
+		   66 Query	SET sql_mode='STRICT_TRANS_TABLES'
+		   66 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = -2 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   66 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000123`
+		   66 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = -1 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   66 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000123`
+		   66 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = 2 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   66 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000123`
+		   66 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS IN (9,10) AND ROLE IN (1,2)
+		   66 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000123`
+		   66 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = 11 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   66 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000123`
+		   66 Quit	
+		   67 Connect	C3000115@grndrt.contactlab.test on C3000115
+		   67 Query	/* mysql-connector-java-5.1.21 ( Revision: ${bzr.revision-id} ) */SHOW VARIABLES WHERE Variable_name ='language' OR Variable_name = 'net_write_timeout' OR Variable_name = 'interactive_timeout' OR Variable_name = 'wait_timeout' OR Variable_name = 'character_set_client' OR Variable_name = 'character_set_connection' OR Variable_name = 'character_set' OR Variable_name = 'character_set_server' OR Variable_name = 'tx_isolation' OR Variable_name = 'transaction_isolation' OR Variable_name = 'character_set_results' OR Variable_name = 'timezone' OR Variable_name = 'time_zone' OR Variable_name = 'system_time_zone' OR Variable_name = 'lower_case_table_names' OR Variable_name = 'max_allowed_packet' OR Variable_name = 'net_buffer_length' OR Variable_name = 'sql_mode' OR Variable_name = 'query_cache_type' OR Variable_name = 'query_cache_size' OR Variable_name = 'init_connect'
+		   67 Query	/* mysql-connector-java-5.1.21 ( Revision: ${bzr.revision-id} ) */SELECT @@session.auto_increment_increment
+		   67 Query	SHOW COLLATION
+		   67 Query	SET NAMES latin1
+		   67 Query	SET character_set_results = NULL
+		   67 Query	SET autocommit=1
+		   67 Query	SET sql_mode='STRICT_TRANS_TABLES'
+		   67 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = -2 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   67 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000115`
+		   67 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = -1 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   67 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000115`
+		   67 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = 2 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   67 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000115`
+		   67 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS IN (9,10) AND ROLE IN (1,2)
+		   67 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000115`
+		   67 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = 11 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   67 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000115`
+		   67 Quit	
+		   68 Connect	C3000101@grndrt.contactlab.test on C3000101
+		   68 Query	/* mysql-connector-java-5.1.21 ( Revision: ${bzr.revision-id} ) */SHOW VARIABLES WHERE Variable_name ='language' OR Variable_name = 'net_write_timeout' OR Variable_name = 'interactive_timeout' OR Variable_name = 'wait_timeout' OR Variable_name = 'character_set_client' OR Variable_name = 'character_set_connection' OR Variable_name = 'character_set' OR Variable_name = 'character_set_server' OR Variable_name = 'tx_isolation' OR Variable_name = 'transaction_isolation' OR Variable_name = 'character_set_results' OR Variable_name = 'timezone' OR Variable_name = 'time_zone' OR Variable_name = 'system_time_zone' OR Variable_name = 'lower_case_table_names' OR Variable_name = 'max_allowed_packet' OR Variable_name = 'net_buffer_length' OR Variable_name = 'sql_mode' OR Variable_name = 'query_cache_type' OR Variable_name = 'query_cache_size' OR Variable_name = 'init_connect'
+		   68 Query	/* mysql-connector-java-5.1.21 ( Revision: ${bzr.revision-id} ) */SELECT @@session.auto_increment_increment
+		   68 Query	SHOW COLLATION
+		   68 Query	SET NAMES latin1
+		   68 Query	SET character_set_results = NULL
+		   68 Query	SET autocommit=1
+		   68 Query	SET sql_mode='STRICT_TRANS_TABLES'
+		   68 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = -2 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   68 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000101`
+		   68 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = -1 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   68 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000101`
+		   68 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = 2 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   68 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000101`
+		   68 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS IN (9,10) AND ROLE IN (1,2)
+		   68 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000101`
+		   68 Query	SELECT * FROM MLR_TA_DELIVERY WHERE STATUS = 11 AND (ROLE = 0 OR PARENT_ID IS NOT NULL)
+		   68 Query	SHOW KEYS FROM `MLR_TA_DELIVERY` FROM `C3000101`
+		   68 Quit	
+

@@ -1,0 +1,37 @@
+package runner.contactlab.com;
+
+import com.google.inject.AbstractModule;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+
+public class App {	
+    public static void main( String[] args ) throws Exception{
+        
+    	final Injector injector = Guice.createInjector(
+			new AbstractModule() {
+				
+				@Override
+				protected void configure() {
+					
+					bind(ApplicationRunner.class);
+					
+				}
+			}
+    	);
+    	
+    	injector.getInstance(ApplicationRunner.class).run();
+    	
+    	System.setProperty("logback.configurationFile", "logback.xml");
+    	
+    }
+}
+
+/*
+
+	Export with:
+	
+	> mvn compile assembly:single
+	
+	http://stackoverflow.com/questions/574594/how-can-i-create-an-executable-jar-with-dependencies-using-maven
+
+*/

@@ -1,0 +1,99 @@
+package script.contactlab.com;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
+
+import runner.contactlab.com.ApplicationRunner;
+import runner.contactlab.com.PayloadAsync;
+
+public class PrintResult {
+	
+	private static final String odd = "background-color:#FFF;";
+	private static final String even = "background-color:#CCC;";
+	
+	public void print(List<? extends Future<PayloadAsync>> scheduleResult, String pathOfResult) throws InterruptedException, ExecutionException {		
+		final StringBuffer sb = new StringBuffer();		
+		sb.append("<!DOCTYPE html><html><body><table style=\"width:100%;border-spacing:10px;\">");
+		
+		sb.append("<tr>");
+		sb.append("<th>Thread ID</th>");
+		sb.append("<th># Connection</th>");
+		sb.append("<th># Statement</th>");
+		sb.append("<th>Max Statement (ms)</th>");
+		sb.append("<th>Min Statement (ms)</th>");
+		sb.append("<th>Average Statement (ms)</th>");
+		sb.append("<th>Connection Id's</th>");
+		sb.append("</tr>\n");
+
+		int totalConnectionNumber = 0;
+		long totalStatementNumber = 0;
+		int i = 1;
+		
+		for (Future<PayloadAsync> scheduledFuture : scheduleResult) {
+			if (scheduledFuture.isDone() && !scheduledFuture.isCancelled()) {
+				final PayloadAsync payloadAsync = scheduledFuture.get();			
+				
+				sb.append("<tr>");
+				sb.append(openTd(i) + i + "</td>");
+				sb.append(openTd(i) + payloadAsync.getNumberOfConnection() + "</td>");
+				sb.append(openTd(i) + payloadAsync.getNumberOfStatement() + "</td>");			
+				sb.append(openTd(i) + payloadAsync.getMaxStatementExecution() + "</td>");
+				sb.append(openTd(i) + payloadAsync.getMinStatementExecution() + "</td>");
+				sb.append(openTd(i) + payloadAsync.getAverageStatementExecution() + "</td>");			 
+				sb.append(openTd(i) + buildLink(payloadAsync.getAllConnectionsId()) + "</td>");
+				sb.append("</tr>\n");
+
+				//for totale row
+				totalConnectionNumber += payloadAsync.getNumberOfConnection();
+				totalStatementNumber += payloadAsync.getNumberOfStatement();			
+				
+				i++;				
+			}
+		}
+		
+		sb.append("<tr>");
+		sb.append(openTd(i) + "TOT. </td>");
+		sb.append(openTd(i) + totalConnectionNumber + "</td>");
+		sb.append(openTd(i) + totalStatementNumber + "</td>");			
+		sb.append(openTd(i) + "</td>");
+		sb.append(openTd(i) + "</td>");
+		sb.append(openTd(i) + "</td>");
+		sb.append(openTd(i) + "</td>");
+		sb.append("</tr>\n");					
+				
+		sb.append("</table></body></html>");
+		writeToFile(pathOfResult + "/" + System.currentTimeMillis() + ".html", sb);
+	}
+
+	private String buildLink(Set<Integer> c) {
+		final StringBuffer sb = new StringBuffer();
+		
+		for (Integer id : c) {
+			sb.append("<a href=\"." + ApplicationRunner.SUB_PATH_FILES + id + "\" target=\"_blank\">" + id + "</a> ");
+		}
+		
+		return sb.toString();
+	}
+
+	private String openTd(int index) {
+		return "<td style='" + ( index % 2 == 0 ? even : odd ) + "'>"; 
+	}
+	
+	private void writeToFile(String pFilename, StringBuffer pData) {
+		try {
+			final BufferedWriter out = new BufferedWriter(new FileWriter(pFilename));
+			
+	        out.write(pData.toString());
+	        out.flush();
+	        out.close();
+		} catch (IOException e) {
+			e.printStackTrace(System.err);
+		}        
+    }	
+
+}

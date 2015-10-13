@@ -1,0 +1,13 @@
+package runner.contactlab.com;
+
+public class Logger {
+	
+	public void info(Object x) {
+		System.out.println(x);
+	}
+
+	public void error(Object x) {
+		System.err.println(x);
+	}
+	
+}

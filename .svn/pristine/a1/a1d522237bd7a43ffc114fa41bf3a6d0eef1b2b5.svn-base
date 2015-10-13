@@ -1,0 +1,42 @@
+package runner.contactlab.com;
+
+import java.util.List;
+import java.util.concurrent.ScheduledFuture;
+
+import script.contactlab.com.PrintResult;
+
+public class RunWhenShuttingDown extends Thread {
+	private List<ScheduledFuture<PayloadAsync>> futureData;
+	private String pathWhereToWriteFile;
+
+	public RunWhenShuttingDown(List<ScheduledFuture<PayloadAsync>> futureData, String pathWhereToWriteFile) {
+		this.futureData = futureData;
+		this.pathWhereToWriteFile = pathWhereToWriteFile;
+	}
+
+	@Override
+	public void run() {
+		System.out.println("END'S !!");
+		
+		/*
+		  se durante l'esecuzione dei thread che eseguono gli statement
+		  un ctlr-c è intercettato ...
+		   
+		  cancello le altre schedulazioni che non hanno ancora eseguito le operazioni
+		  e stampo solo quello che è stato eseguito veramente!!?
+		  
+		  altrimenti la cancellazione di un thread che ha già terminato 
+		  non ha alcun effetto.
+		 */
+		for (ScheduledFuture<PayloadAsync> scheduledFuture : futureData) {
+			scheduledFuture.cancel(true);
+		}
+
+		try {
+			new PrintResult().print(futureData, pathWhereToWriteFile);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+}

@@ -1,0 +1,118 @@
+package runner.contactlab.com;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.io.LineNumberReader;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.TimeUnit;
+
+import javax.sql.DataSource;
+
+import org.apache.commons.lang3.StringUtils;
+
+import com.google.common.base.Stopwatch;
+
+import script.contactlab.com.ConnectionScanner;
+import script.contactlab.com.SearchLoadDataRealFileName;
+import script.contactlab.com.TimerConnectionAggregator;
+
+public class MyCallable implements Callable<PayloadAsync> {
+	
+	private TimerConnectionAggregator tca;
+	private String filesPath;
+	private String loadDatasPath;
+	private DataSource ds;
+
+	public MyCallable(TimerConnectionAggregator tca, String filesPath, String loadDatasPath, DataSource ds) {
+		this.tca = tca;
+		this.filesPath = filesPath;
+		this.loadDatasPath = loadDatasPath;
+		this.ds = ds;
+	}
+
+	@Override
+	public PayloadAsync call() throws Exception {
+		final PayloadAsync result = new PayloadAsync();		
+		final List<Integer> ids = tca.getIds();
+		
+		for (Integer id : ids) {			
+			final LineNumberReader lnr = new LineNumberReader(
+				new BufferedReader(new InputStreamReader(
+					new FileInputStream(filesPath + id)
+				))
+			);
+						
+			lnr.skip(Long.MAX_VALUE);
+			System.err.println("On connection: " + id + " found lines: " + lnr.getLineNumber());
+			lnr.close();
+			
+			final Connection connection = ds.getConnection();
+			
+			for (String sql : new ConnectionScanner(filesPath + id).buildStatemens()) {
+				if (StringUtils.contains(sql, SearchLoadDataRealFileName.START_LOADDATA_STATEMENT)) {
+					final String[] between = StringUtils.substringsBetween(
+						sql, SearchLoadDataRealFileName.START_LOADDATA_STATEMENT, SearchLoadDataRealFileName.END_LOADDATA_STATEMENT
+					);
+					
+					if (between.length != 1) {
+						throw new IllegalArgumentException("Can't execute LOAD DATA with pattern: " + Arrays.toString(between));
+					} else {						
+						final Stopwatch sw = Stopwatch.createStarted();						
+						
+						executeStatement(StringUtils.replace(sql, between[0], loadDatasPath + tca.getLoadData(id)), connection);
+						
+						sw.stop();						
+						result.addExecutionTime(id, sw.elapsed(TimeUnit.MILLISECONDS));
+					}
+				} else {
+					final Stopwatch sw = Stopwatch.createStarted();
+					
+					executeStatement(sql, connection);
+					
+					sw.stop();						
+					result.addExecutionTime(id, sw.elapsed(TimeUnit.MILLISECONDS));					
+				}
+			}
+			
+			connection.close();
+		}
+		
+		return result;
+	}
+
+	private void executeStatement(String sql, final Connection connection) {
+		Statement stmt = null;
+		
+		try {			
+			stmt = connection.createStatement();
+			System.err.println("execute> " + sql);
+			System.err.println("result> " + stmt.execute(sql) + "\n");
+		} catch (SQLException ex) {
+			ex.printStackTrace(System.err);
+		} finally {
+			try {
+				stmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace(System.err);
+			}
+		}
+	}
+	
+//	public static void main(String[] args) {
+//		
+//		String sql1 = "LOAD DATA LOCAL INFILE \"/u/data/contactlab/tmp/1421746171.217\" INTO TABLE DB_3860 FIELDS TERMINATED BY ';' OPTIONALLY ENCLOSED BY '\"' LINES TERMINATED BY '' IGNORE 1 LINES (`Email`,`Nome`,`Cognome`,`Regione`,`Sesso`)";			
+//		String sql2 = "LOAD DATA LOCAL INFILE 'C:\\tmp\\jboss\\AP\\fileOperations\\3000116\\7935\\fileOperation4880993734274841690.1421746355218.csv' INTO TABLE FILE_OP_7935_ FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' ESCAPED BY '\\' LINES TERMINATED BY '\n' IGNORE 0 LINES (PK_ID,PUSH_KEY,Field_2,push_endpoint_field,Field_4)";
+//		String sql3 = "LOAD DATA LOCAL INFILE '/tmp/jboss/AP/fileOperations/3000116/7935/Selected_Records.csv' INTO TABLE DB_6394 FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' ESCAPED BY '\\' LINES TERMINATED BY '' IGNORE 0 LINES (PUSH_KEY,Field_2,push_endpoint_field,Field_4)";	
+//		
+//		System.err.println(Arrays.toString(StringUtils.substringsBetween(sql1, SearchLoadDataRealFileName.START_LOADDATA_STATEMENT, SearchLoadDataRealFileName.END_LOADDATA_STATEMENT)));
+//		System.err.println(Arrays.toString(StringUtils.substringsBetween(sql2, SearchLoadDataRealFileName.START_LOADDATA_STATEMENT, SearchLoadDataRealFileName.END_LOADDATA_STATEMENT)));
+//		System.err.println(Arrays.toString(StringUtils.substringsBetween(sql3, SearchLoadDataRealFileName.START_LOADDATA_STATEMENT, SearchLoadDataRealFileName.END_LOADDATA_STATEMENT)));
+//		
+//	}
+}

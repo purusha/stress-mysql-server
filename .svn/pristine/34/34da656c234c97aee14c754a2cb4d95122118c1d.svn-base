@@ -1,0 +1,46 @@
+package script.contactlab.com;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.List;
+
+public class SplitGeneralQueryLogFile {
+	
+	public List<TimerConnectionAggregator> run(final String generalLogQueryFile, String parentDir) throws IOException {
+		final List<TimerConnectionAggregator> data;
+		
+		{
+			final FileInputStream fstream = new FileInputStream(generalLogQueryFile);			
+			final BufferedReader br = new BufferedReader(new InputStreamReader(fstream));		
+			
+			new CreateFileForEachConnectionId().run(br, parentDir);			
+			br.close();
+		}
+		
+		{
+			final FileInputStream fstream2 = new FileInputStream(generalLogQueryFile);	
+			final BufferedReader br2 = new BufferedReader(new InputStreamReader(fstream2));
+			
+			data = new WriteEachLine(parentDir).run(br2);
+			br2.close();					
+		}
+		
+		for (TimerConnectionAggregator timerConnectionAggregator : data) {
+			System.err.println(timerConnectionAggregator.toString());
+		}				
+		
+		return data;
+	}
+	
+//	public static void main(String[] args) throws IOException {		
+//		final String generalLogQueryFile = "/home/alan/Desktop/db1m-staging.log";
+////		final String generalLogQueryFile = "/home/alan/Desktop/a.txt";
+//		
+//		for (TimerConnectionAggregator timerConnectionAggregator : new SplitGeneralQueryLogFile().run(generalLogQueryFile)) {
+//			System.err.println(timerConnectionAggregator.toString());
+//		}		
+//	}
+	
+}

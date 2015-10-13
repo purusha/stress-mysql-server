@@ -1,0 +1,46 @@
+package runner.contactlab.com;
+
+import java.beans.PropertyVetoException;
+
+import javax.sql.DataSource;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import script.contactlab.com.ApplicationParameter;
+import script.contactlab.com.ApplicationParameterHandler;
+
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+
+public abstract class ApplicationRunner {
+	protected static final Logger logger = LoggerFactory.getLogger(ApplicationRunner.class);
+	public static final String SUB_PATH_FILES = "/files/";
+	
+	public void run() throws Exception {
+		logger.info("Give me application parameters ...");
+		final ApplicationParameter params = new ApplicationParameterHandler().run();
+
+		realRun(params);		
+	}
+	
+	public void run(ApplicationParameter params) throws Exception {
+		realRun(params);
+	}
+	
+	protected abstract void realRun(final ApplicationParameter params) throws Exception; 
+
+	protected DataSource buildDataSource(String host) throws PropertyVetoException {
+		final ComboPooledDataSource ds = new ComboPooledDataSource();
+		
+		ds.setDriverClass("com.mysql.jdbc.Driver");		
+		ds.setJdbcUrl("jdbc:mysql://" + host + ":3306/"); //add ?profileSQL=true for profile all sql stament with c3p0
+		ds.setUser("u_stressato");
+		ds.setPassword("s3ssat0");
+		
+		ds.setAcquireIncrement(10);
+		ds.setMaxPoolSize(100);
+		ds.setMinPoolSize(10);	
+		
+		return ds;
+	}	
+}

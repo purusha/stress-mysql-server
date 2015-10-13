@@ -1,0 +1,87 @@
+package script.contactlab.com;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Queue;
+import java.util.concurrent.Future;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import runner.contactlab.com.PayloadAsync;
+
+public class PartialResultWriter implements Runnable {	
+	private static final int NUMBER_OF_ITEMS = 15000;
+	private static final Logger logger = LoggerFactory.getLogger(PartialResultWriter.class);
+
+	private Queue<? extends Future<PayloadAsync>> futureData;
+	private String pathWhereToWriteFile;
+	private boolean end;
+	private ApplicationCheckPointCounter checkPoint;
+
+	public PartialResultWriter(Queue<? extends Future<PayloadAsync>> futureData, String pathWhereToWriteFile, ApplicationCheckPointCounter checkPoint) {
+		this.futureData = futureData;
+		this.pathWhereToWriteFile = pathWhereToWriteFile;
+		this.checkPoint = checkPoint;
+		this.end = false;
+	}
+	
+	@Override
+	public void run() {
+		logger.info("XXX search and write partial result");		
+		
+		if (futureData.isEmpty()) {
+			end = true;
+		} else {
+			writeResult();
+		}
+				
+		logger.info("XXX search and write partial result");
+	}
+	
+	private void writeResult() {
+		final List<PayloadAsync> partialResult = new ArrayList<PayloadAsync>();
+			
+		try {			
+			//XXX DRY
+			Future<PayloadAsync> element = futureData.element();		
+			boolean skipElement = element.isCancelled();
+			System.out.println("XXX skipElement: " + skipElement);
+			boolean continueLoop = element.isDone() && partialResult.size() < NUMBER_OF_ITEMS;
+			System.out.println("XXX continueLoop: " + continueLoop);
+			
+			while(continueLoop) {											
+				if (skipElement) {
+					futureData.remove(); //element to /dev/null
+				} else {
+					partialResult.add(futureData.remove().get());	
+				}
+	
+				if (futureData.isEmpty()) {
+					continueLoop = false;
+				} else {
+					//XXX DRY
+					element = futureData.element();	
+					skipElement = element.isCancelled();
+					System.out.println("XXX skipElement: " + skipElement);
+					continueLoop = element.isDone() && partialResult.size() < NUMBER_OF_ITEMS;
+					System.out.println("XXX continueLoop: " + continueLoop);
+				}
+			}					
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
+		
+		if (partialResult.isEmpty()) {
+			System.out.println("XXX no elements will be exported");
+		} else {
+			checkPoint.partialNumber(partialResult.size());
+			new PrintResult().print(partialResult, pathWhereToWriteFile, checkPoint);			
+		}
+	}
+
+	public boolean isEnd() {
+		return end;
+	}
+
+}

@@ -1,0 +1,43 @@
+package runner.contactlab.com;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.io.LineNumberReader;
+import java.util.List;
+import java.util.concurrent.Callable;
+
+import script.contactlab.com.TimerConnectionAggregator;
+
+public class MyCallable implements Callable<PayloadAsync> {
+	
+	private TimerConnectionAggregator tca;
+	private String filesPath;
+	private String loadDatasPath;
+
+	public MyCallable(TimerConnectionAggregator tca, String filesPath, String loadDatasPath) {
+		this.tca = tca;
+		this.filesPath = filesPath;
+		this.loadDatasPath = loadDatasPath;
+	}
+
+	@Override
+	public PayloadAsync call() throws Exception {		
+		final List<Integer> ids = tca.getIds();
+		
+		for (Integer id : ids) {			
+			final LineNumberReader lnr = new LineNumberReader(
+				new BufferedReader(new InputStreamReader(
+					new FileInputStream(filesPath + id)
+				))
+			);
+						
+			lnr.skip(Long.MAX_VALUE);
+			System.err.println("On connection: " + id + " found lines: " + lnr.getLineNumber() + " and fileNames: " + tca.getLoadData(id));
+			lnr.close();
+		}
+		
+		return null;
+	}
+
+}
