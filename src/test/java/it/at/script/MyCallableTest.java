@@ -69,7 +69,7 @@ public class MyCallableTest {
 		Mockito.when(connection.createStatement()).thenReturn(statement1, statement2, statement3);
 		
 		//run
-		final PayloadAsync call = new MyCallable(tca, rootDir, null, ds).call();
+		final PayloadAsync call = new MyCallable(tca, rootDir, null, ds, false).call();
 		
 		//verify
 		assertThat(call, is(notNullValue()));		

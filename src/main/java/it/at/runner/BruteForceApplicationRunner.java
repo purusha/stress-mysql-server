@@ -29,7 +29,7 @@ import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.mchange.v2.c3p0.PooledDataSource;
 
-class BruteForceApplicationRunner extends ApplicationRunner {	
+public class BruteForceApplicationRunner extends ApplicationRunner {	
 	private LoadDataFileNameRepository repository;
 	private ApplicationCheckPointCounter checkPoint;
 
@@ -58,7 +58,7 @@ class BruteForceApplicationRunner extends ApplicationRunner {
 				tcas.add(new TimerConnectionAggregator(NumberUtils.LONG_ZERO, Sets.newHashSet(i)));
 			}
 			
-			schedule(params.getNumberOfThread(), tcas, filesPath, null, params.getDatabaseServer(), params.getPathOfPayload());											
+			schedule(params, tcas, filesPath, null, params.getPathOfPayload());											
 		} else {
 			logger.info("Start searching of real file name of LOAD DATA: " + idsWithLoadData.size());
 			((PropertyLoadDataFileNameRepository)repository).run(idsWithLoadData, params.getPathOfRealFileNames());
@@ -75,23 +75,25 @@ class BruteForceApplicationRunner extends ApplicationRunner {
 			}
 			
 			logger.info("Start schedule of " + connectionFileNames.size() + " connection's and " + idsWithLoadData.size() + " load data");
-			schedule(params.getNumberOfThread(), tcas, filesPath, params.loadDataDirPath(), params.getDatabaseServer(), params.getPathOfPayload()); 	
+			schedule(params, tcas, filesPath, params.loadDataDirPath(), params.getPathOfPayload()); 	
 		}
 	}
 	
-	private void schedule(int numberOfThread, List<TimerConnectionAggregator> data, String filesPath, String loadDatasPath, String dbHostName, String generalLogDirPath) {
+	private void schedule(
+	    ApplicationParameter params, List<TimerConnectionAggregator> data, String filesPath, String loadDatasPath, String generalLogDirPath
+    ) {
 		checkPoint.totalNumber(data.size());
 		
 		final Queue<Future<PayloadAsync>> futureData = new ConcurrentLinkedQueue<Future<PayloadAsync>>(); //new LinkedList 		
-		final ExecutorService pool = Executors.newFixedThreadPool(numberOfThread);		
-		final PooledDataSource ds = buildDataSource(dbHostName, numberOfThread);
+		final ExecutorService pool = Executors.newFixedThreadPool(params.getNumberOfThread());		
+		final PooledDataSource ds = buildDataSource(params);
 		
 		addHookForCancelTask(futureData, ds);
 		
 		for (TimerConnectionAggregator tca : data) {
 			futureData.add(
 				pool.submit(
-					new MyCallable(tca, filesPath, loadDatasPath, ds) 
+					new MyCallable(tca, filesPath, loadDatasPath, ds, params.isDryRun()) 
 				)
 			);
 		}			

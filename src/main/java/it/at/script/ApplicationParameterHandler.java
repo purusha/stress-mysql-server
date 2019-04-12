@@ -13,8 +13,8 @@ public class ApplicationParameterHandler {
 	
 	public static final String BYNARY_LOG_DIR = "/bin/";
 	public static final String GENERAL_QUERY_LOG_FILE = "/general.log";
-	static final String NAMES_FILE = "/names.properties";
-	static final String LOAD_DATA_DIR = "/load-data/";	
+	public static final String NAMES_FILE = "/names.properties";
+	public static final String LOAD_DATA_DIR = "/load-data/";	
 		
 	public ApplicationParameter run() throws Exception {
 		final Scanner scanner = new Scanner(System.in);
@@ -51,10 +51,28 @@ public class ApplicationParameterHandler {
 		logger.info("Supplied Path of payload: " + pathOfPayload);
 		result.setPathOfPayload(pathOfPayload);
 		
+		//databaseUser PARAM
+        String databaseUser = null;
+        while (StringUtils.isBlank(databaseUser)) {
+            System.out.println("Db User:");
+            databaseUser = scanner.nextLine();                    
+        }       
+        logger.info("Supplied Db User: " + databaseUser);
+        result.setDatabaseUser(databaseUser);
+		
+	    //databasePassword PARAM
+        String databasePassword = null;
+        while (StringUtils.isBlank(databasePassword)) {
+            System.out.println("Db Password:");
+            databasePassword = scanner.nextLine();                    
+        }       
+        logger.info("Supplied Db Password: " + databasePassword);
+        result.setDatabasePassword(databasePassword);
+		
 		scanner.close();
 		
-		check(pathOfPayload);		
-		
+		check(pathOfPayload);	
+				
 		return result;
 	}
 
@@ -80,17 +98,17 @@ public class ApplicationParameterHandler {
 		System.out.println("####################################################################################################");
 	}
 	
-	private boolean isAccesibleDir(final String path) {
+	public static boolean isAccesibleDir(final String path) {
 		final File f = new File(path);		
 		
 		return f.isDirectory() && isAccesible(f);
 	}	
 
-	private boolean isAccesible(final File f) {
+	private static boolean isAccesible(final File f) {
 		return f.exists() && f.canRead();
 	}	
 
-	private boolean isAccesible(final String path) {
+	public static boolean isAccesible(final String path) {
 		final File f = new File(path);		
 		
 		return isAccesible(f);

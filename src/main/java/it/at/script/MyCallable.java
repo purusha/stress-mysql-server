@@ -22,16 +22,18 @@ import com.google.common.base.Stopwatch;
 public class MyCallable implements Callable<PayloadAsync> {
 	private static final Logger logger = LoggerFactory.getLogger(MyCallable.class);
 	
-	private TimerConnectionAggregator tca;
-	private String filesPath;
-	private String loadDatasPath;
-	private DataSource ds;
+	private final TimerConnectionAggregator tca;
+	private final String filesPath;
+	private final String loadDatasPath;
+	private final DataSource ds;
+	private final boolean dryRun;
 
-	public MyCallable(TimerConnectionAggregator tca, String filesPath, String loadDatasPath, DataSource ds) {
+	public MyCallable(TimerConnectionAggregator tca, String filesPath, String loadDatasPath, DataSource ds, boolean dryRun) {
 		this.tca = tca;
 		this.filesPath = filesPath;
 		this.loadDatasPath = loadDatasPath;
 		this.ds = ds;
+		this.dryRun = dryRun;
 	}
 
 	@Override
@@ -41,7 +43,7 @@ public class MyCallable implements Callable<PayloadAsync> {
 		for (Integer id : tca.getIds()) {
 			Connection connection = null;
 			try {				
-				connection = ds.getConnection();	
+				connection = dryRun ? null : ds.getConnection();	
 				executeAllStatementOf(id, connection, result);
 			} catch (Throwable e) {
 				logger.error(id + " >> " + e.getMessage());
@@ -96,8 +98,12 @@ public class MyCallable implements Callable<PayloadAsync> {
 	
 	private long realExecute(String sql, final Connection connection) throws SQLException {
 		final Stopwatch sw = Stopwatch.createStarted();
-		
-		executeStatement(sql, connection);
+				
+		if (dryRun) {
+		    logger.info("stmt: {}", sql);
+		} else {
+		    executeStatement(sql, connection);		    
+		}
 		
 		return sw.elapsed(TimeUnit.MILLISECONDS);		
 	}

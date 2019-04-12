@@ -18,8 +18,7 @@ import com.mchange.v2.log.FallbackMLog;
 public class App {
 	private static final Logger logger = LoggerFactory.getLogger(App.class);
 	
-    public static void main( String[] args ) {
-        
+    public static void main( String[] args ) {        
     	final Injector injector = Guice.createInjector(
 			new AbstractModule() {				
 				@Override
@@ -48,16 +47,20 @@ public class App {
         		
         		injector.getInstance(ApplicationRunner.class).run();
         		
-        	} else if (args.length == 3) {
+        	} else if (args.length == 5) {
         		
-        		final ApplicationParameter params = new ApplicationParameter(new Integer(args[0]), args[1], args[2]);        		
-        		new ApplicationParameterHandler().check(params.getPathOfPayload());        		
+        		final ApplicationParameter params = new ApplicationParameter(
+        		    new Integer(args[0]), args[1], args[2], args[3], args[4]
+		        );
+        		
+        		new ApplicationParameterHandler().check(params.getPathOfPayload());  
+        		
         		injector.getInstance(ApplicationRunner.class).run(params);
         		
         	} else {
         		
-        		System.out.println("Execute with: numberOfThread databaseServer absolutePathOfPayload");
-        		System.out.println(">java [-Ddelay] -jar mysql-stress-tool.jar 10 db1m-staging.at.test /home/alan/Desktop/4");
+        		System.out.println("Execute with: numberOfThread databaseServer absolutePathOfPayload databaseUser databasePassword");
+        		System.out.println(">java [-Ddelay] [-Ddryrun] -jar mysql-stress-tool.jar 10 db1.at.test /home/alan/Desktop/4 user password");
         		
         	}    	    	        		
     	} catch (Exception e) {    		

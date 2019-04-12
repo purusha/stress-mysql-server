@@ -27,7 +27,8 @@ import java.util.concurrent.TimeUnit;
 import com.google.inject.Inject;
 import com.mchange.v2.c3p0.PooledDataSource;
 
-class DelayedApplicationRunner extends ApplicationRunner {	
+public class DelayedApplicationRunner extends ApplicationRunner {
+	
 	private LoadDataFileNameRepository repository;
 	private ApplicationCheckPointCounter checkPoint;
 
@@ -53,7 +54,7 @@ class DelayedApplicationRunner extends ApplicationRunner {
 				
 		if (idsWithLoadData.isEmpty()) {
 			System.out.println("Start schedule of " + connectionFileNames.size() + " connection's");
-			schedule(params.getNumberOfThread(), tcas, filesPath, null, params.getDatabaseServer(), params.getPathOfPayload());											
+			schedule(params, tcas, filesPath, null, params.getPathOfPayload());											
 		} else {			
 			logger.info("Start searching of real file name of LOAD DATA: " + idsWithLoadData.size());
 			((PropertyLoadDataFileNameRepository)repository).run(idsWithLoadData, params.getPathOfRealFileNames());
@@ -67,7 +68,7 @@ class DelayedApplicationRunner extends ApplicationRunner {
 			}
 			
 			logger.info("Start schedule of " + connectionFileNames.size() + " connection's and " + idsWithLoadData.size() + " load data");
-			schedule(params.getNumberOfThread(), tcas, filesPath, params.loadDataDirPath(), params.getDatabaseServer(), params.getPathOfPayload()); 	
+			schedule(params, tcas, filesPath, params.loadDataDirPath(), params.getPathOfPayload()); 	
 		}
 	}
 	
@@ -88,76 +89,14 @@ class DelayedApplicationRunner extends ApplicationRunner {
 		return tcas;
 	}
 
-//	@Override
-//	protected void realRun(final ApplicationParameter params) throws Exception {
-//		logger.info("Starting ...");		
-//		final String filesPath = params.getPathOfPayload() + SUB_PATH_FILES;
-//		
-//		//make dir /files and empty if exist
-//		final File t = new File(filesPath);		
-//		delete(t);			
-//		t.mkdir();
-//		
-//		System.out.println("Start splitter of general query log file");
-//		final List<TimerConnectionAggregator> data = new SplitGeneralQueryLogFile().run(params.generalQueryLogPath(), filesPath);
-//		
-//		System.out.println("Start search LOAD DATA into general query log file");
-//		final Set<Integer> idsWithLoadData = new SearchLoadDataStatement().run(params.generalQueryLogPath());
-//		
-//		if (idsWithLoadData.isEmpty()) {
-//			System.out.println("Start schedule of " + data.size() + " connection's");
-//			schedule(params.getNumberOfThread(), data, filesPath, null, params.getDatabaseServer(), params.getPathOfPayload());											
-//		} else {			
-//			logger.info("Start searching of real file name of LOAD DATA: " + idsWithLoadData.size());
-//			((PropertyLoadDataFileNameRepository)repository).run(idsWithLoadData, params.getPathOfRealFileNames());
-//			
-//			for (TimerConnectionAggregator tca : data) {				
-//				for (Integer i : tca.getIds()) {
-//					if (repository.containsKey(i)) {
-//						tca.addLoadData(i, repository.get(i));
-//					}					
-//				}
-//			}
-//			
-//			System.out.println("Start schedule of " + data.size() + " connection's and " + idsWithLoadData.size() + " load data");
-//			schedule(params.getNumberOfThread(), data, filesPath, params.loadDataDirPath(), params.getDatabaseServer(), params.getPathOfPayload()); 	
-//		}
-//	}
-	
-//	private void delete(File file) throws IOException {
-//		if (file.exists() && file.isDirectory()) {
-//			// directory is empty, then delete it
-//			if (file.list().length == 0) {
-//				file.delete();
-//			} else {
-//				// list all the directory contents
-//				final String files[] = file.list();
-//
-//				for (String temp : files) {
-//					// construct the file structure
-//					final File fileDelete = new File(file, temp);
-//
-//					// recursive delete
-//					delete(fileDelete);
-//				}
-//
-//				// check the directory again, if empty then delete it
-//				if (file.list().length == 0) {
-//					file.delete();
-//				}
-//			}
-//		} else {
-//			// if file, then delete it
-//			file.delete();
-//		}
-//	}
-	
-	private void schedule(int numberOfThread, List<TimerConnectionAggregator> data, String filesPath, String loadDatasPath, String dbHostName, String generalLogDirPath) {
+	private void schedule(
+	    ApplicationParameter params, List<TimerConnectionAggregator> data, String filesPath, String loadDatasPath, String generalLogDirPath
+    ) {
 		checkPoint.totalNumber(data.size());
 		
 		final Queue<ScheduledFuture<PayloadAsync>> futureData = new ConcurrentLinkedQueue<ScheduledFuture<PayloadAsync>>();						
-		final ScheduledExecutorService pool = Executors.newScheduledThreadPool(numberOfThread);
-		final PooledDataSource ds = buildDataSource(dbHostName, numberOfThread);
+		final ScheduledExecutorService pool = Executors.newScheduledThreadPool(params.getNumberOfThread());
+		final PooledDataSource ds = buildDataSource(params);
 		
 		addHookForCancelTask(futureData, ds);				
 		
@@ -167,7 +106,7 @@ class DelayedApplicationRunner extends ApplicationRunner {
 			
 			futureData.add(
 				pool.schedule(
-					new MyCallable(tca, filesPath, loadDatasPath, ds), 
+					new MyCallable(tca, filesPath, loadDatasPath, ds, params.isDryRun()), 
 					current, 
 					TimeUnit.MILLISECONDS
 				)

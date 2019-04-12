@@ -36,7 +36,7 @@ public abstract class ApplicationRunner {
 	
 	protected abstract void realRun(final ApplicationParameter params) throws Exception; 
 
-	protected PooledDataSource buildDataSource(String host, int numberOfThread) {
+	protected PooledDataSource buildDataSource(final ApplicationParameter params) {
 		final ComboPooledDataSource ds = new ComboPooledDataSource();
 		
 		try {
@@ -45,12 +45,12 @@ public abstract class ApplicationRunner {
 			logger.error(e.getMessage(), e);
 		}		
 		
-		ds.setJdbcUrl("jdbc:mysql://" + host + ":3306/"); //add ?profileSQL=true for profile all sql stament with c3p0
-		ds.setUser("username");
-		ds.setPassword("password");
+		ds.setJdbcUrl("jdbc:mysql://" + params.getDatabaseServer() + ":3306/"); //add ?profileSQL=true for profile all sql stament with c3p0
+		ds.setUser(params.getDatabaseUser());
+		ds.setPassword(params.getDatabasePassword());
 						
-		ds.setMinPoolSize(numberOfThread);		
-		ds.setMaxPoolSize(numberOfThread * 2);
+		ds.setMinPoolSize(params.getNumberOfThread());		
+		ds.setMaxPoolSize(params.getNumberOfThread() * 2);
 		ds.setAcquireIncrement(5);
 		
 		//Defines how many times c3p0 will try to acquire a new Connection from the database before giving up. If this value is less than or equal to zero, c3p0 will keep trying to fetch a Connection indefinitely.
@@ -102,7 +102,8 @@ public abstract class ApplicationRunner {
 				
 				for (Future<PayloadAsync> scheduledFuture : futureData) {
 					scheduledFuture.cancel(true);
-				}				
+				}
+				
 			}
 		});		
 	}
@@ -116,8 +117,7 @@ public abstract class ApplicationRunner {
 		        	final Integer i = Integer.valueOf(fileEntry.getName());
 		        	
 		        	result.add(i);	        		
-	        	} catch (NumberFormatException nfe) {	        			        		
-	        	}
+	        	} catch (NumberFormatException nfe) { }
 	        }
 	    }
 	    
